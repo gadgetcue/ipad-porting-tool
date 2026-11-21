@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ipadport"
+version = "0.1.0"
+description = "Port Mac and Windows app source code (Electron, web, SwiftUI/AppKit and more) to adaptive iPad and iPhone apps."
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.9"
+authors = [{ name = "GadgetCue" }]
+keywords = ["ipad", "ios", "porting", "electron", "swiftui", "xcode", "cross-platform"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Topic :: Software Development :: Build Tools",
+]
+
+[project.urls]
+Homepage = "https://github.com/gadgetcue/ipad-porting-tool"
+
+[project.scripts]
+ipadport = "ipadport.cli:main"
+
+[tool.setuptools]
+packages = ["ipadport"]
+
+[tool.setuptools.package-data]
+ipadport = ["templates/**/*"]

@@ -1,0 +1,53 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: ["3.9", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install Playwright (for the browser test of the generated JS)
+        run: |
+          npm install --no-save playwright@1.48.2
+          npx playwright install --with-deps chromium
+      - name: Unit tests
+        env:
+          NODE_PATH: ${{ github.workspace }}/node_modules
+        run: python -m unittest discover -s tests -v
+      - name: Install as a package
+        run: |
+          pip install .
+          ipadport --version
+          ipadport analyze examples/electron-notes
+
+  build-ios:
+    # Generates the example's iPad/iPhone project and compiles it with Xcode for the iOS Simulator.
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install XcodeGen
+        run: brew install xcodegen
+      - name: Generate the iPad/iPhone project
+        run: python3 -m ipadport port examples/electron-notes --out build/NotesExample
+      - name: Create the Xcode project
+        working-directory: build/NotesExample
+        run: xcodegen generate
+      - name: Build for the iOS Simulator
+        working-directory: build/NotesExample
+        run: |
+          xcodebuild -project NotesExample.xcodeproj -scheme NotesExample \
+            -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' \
+            -configuration Debug CODE_SIGNING_ALLOWED=NO build | tail -n 40
+          test "${PIPESTATUS[0]}" -eq 0

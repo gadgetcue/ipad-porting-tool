@@ -1,0 +1,11 @@
+body { margin: 0; display: grid; grid-template-columns: 260px 1fr; height: 100vh; font: 15px -apple-system, system-ui, sans-serif; }
+aside { border-right: 1px solid #ddd; overflow: auto; }
+aside div { padding: 12px; border-bottom: 1px solid #eee; cursor: pointer; }
+aside div.active { background: #e8f0fe; }
+main { display: flex; flex-direction: column; }
+textarea { flex: 1; border: 0; padding: 16px; font: inherit; resize: none; }
+.bar { display: flex; gap: 8px; padding: 8px; border-top: 1px solid #ddd; }
+button { padding: 8px 14px; font: inherit; }
+/* Adaptive: on iPhone (compact width) stack the list above the editor. */
+.ipadport-compact body { grid-template-columns: 1fr; grid-template-rows: 160px 1fr; }
+@media (prefers-color-scheme: dark) { body { background: #1c1c1e; color: #eee; } textarea { background: #1c1c1e; color: #eee; } }

@@ -1,0 +1,9 @@
+{
+  "name": "electron-notes",
+  "productName": "Notes Example",
+  "version": "1.2.0",
+  "description": "A tiny Electron notes app used to test ipadport.",
+  "main": "main.js",
+  "scripts": { "start": "electron ." },
+  "devDependencies": { "electron": "^33.0.0" }
+}
