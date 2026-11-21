@@ -48,7 +48,7 @@ or tells you precisely where it is and what to replace it with.
 
 ## Install
 
-Requires Python 3.9+. No other dependencies.
+Requires Python 3.10+. No other dependencies.
 
 ```sh
 pip install git+https://github.com/gadgetcue/ipad-porting-tool

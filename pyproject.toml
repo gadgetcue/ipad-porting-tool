@@ -8,7 +8,7 @@ version = "0.1.0"
 description = "Port Mac and Windows app source code (Electron, web, SwiftUI/AppKit and more) to adaptive iPad and iPhone apps."
 readme = "README.md"
 license = { text = "MIT" }
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 authors = [{ name = "GadgetCue" }]
 keywords = ["ipad", "ios", "porting", "electron", "swiftui", "xcode", "cross-platform"]
 classifiers = [
